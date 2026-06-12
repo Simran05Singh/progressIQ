@@ -1,0 +1,61 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f7fa;
+    padding:20px;
+}
+
+header{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+#goal-form{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    margin-bottom:30px;
+}
+
+input{
+    padding:10px;
+    width:300px;
+}
+
+button{
+    padding:10px 20px;
+    cursor:pointer;
+}
+
+.goal-card{
+    background:white;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:10px;
+}
+.goal-card{
+    background:white;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.goal-card h2{
+    margin-bottom:15px;
+}
+
+.progress-section,
+.milestone-section,
+.task-section,
+.metric-section{
+    margin-top:15px;
+    padding:10px;
+    background:#f7f7f7;
+    border-radius:8px;
+}
