@@ -61,7 +61,7 @@ function renderGoals() {
                 <ul>
                     ${
                         goal.milestones
-                        .map(m => `<li>${m}</li>`)
+                        .map(m => `<li>${m.title}</li>`)
                         .join("")
                     }
                 </ul>
@@ -95,7 +95,11 @@ function addMilestone(goalId, btn){
     const goal =
         goals.find(g => g.id === goalId);
 
-    goal.milestones.push(milestone);
+    goal.milestones.push({
+        id: Date.now(),
+        title: milestone,
+        tasks: []
+    });
 
     renderGoals();
 }
