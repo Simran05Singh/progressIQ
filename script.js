@@ -26,6 +26,33 @@ function addGoal() {
 
     goalInput.value = "";
 }
+function calculateProgress(goal){
+
+    let totalTasks = 0;
+    let completedTasks = 0;
+
+    goal.milestones.forEach(milestone => {
+
+        milestone.tasks.forEach(task => {
+
+            totalTasks++;
+
+            if(task.completed){
+                completedTasks++;
+            }
+
+        });
+
+    });
+
+    if(totalTasks === 0){
+        return 0;
+    }
+
+    return Math.round(
+        (completedTasks / totalTasks) * 100
+    );
+}
 
 function renderGoals() {
 
@@ -41,7 +68,10 @@ function renderGoals() {
             <h2>${goal.title}</h2>
 
             <div class="progress-section">
-                <p>Overall Progress: 0%</p>
+                <p>
+                    Overall Progress:
+                    ${calculateProgress(goal)}%
+                </p>
             </div>
 
             <div class="milestone-section">
@@ -84,7 +114,28 @@ function renderGoals() {
                     <ul>
                         ${
                             m.tasks.map(task => `
-                                <li>${task.title}</li>
+                            <li>
+
+                                <input
+                                    type="checkbox"
+                                    ${
+                                        task.completed
+                                        ? "checked"
+                                        : ""
+                                    }
+
+                                    onchange="
+                                        toggleTask(
+                                            ${goal.id},
+                                            ${m.id},
+                                            ${task.id}
+                                        )
+                                    "
+                                >
+
+                                ${task.title}
+
+                            </li>
                             `).join("")
                         }           
                     </ul>
@@ -156,6 +207,32 @@ function addTask(goalId, milestoneId){
         title: taskTitle,
         completed: false
     });
+
+    renderGoals();
+}
+function toggleTask(
+    goalId,
+    milestoneId,
+    taskId
+){
+
+    const goal =
+        goals.find(
+            g => g.id === goalId
+        );
+
+    const milestone =
+        goal.milestones.find(
+            m => m.id === milestoneId
+        );
+
+    const task =
+        milestone.tasks.find(
+            t => t.id === taskId
+        );
+
+    task.completed =
+        !task.completed;
 
     renderGoals();
 }
