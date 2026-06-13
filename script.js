@@ -59,11 +59,39 @@ function renderGoals() {
                 </button>
 
                 <ul>
-                    ${
-                        goal.milestones
-                        .map(m => `<li>${m.title}</li>`)
-                        .join("")
-                    }
+                ${
+                goal.milestones.map(m => `
+                <li>
+
+                    <strong>${m.title}</strong>
+
+                    <div>
+
+                        <input
+                            type="text"
+                            placeholder="Add Task"
+                            id="task-${m.id}"
+                        >
+
+                        <button
+                            onclick="addTask(${goal.id}, ${m.id})"
+                        >
+                            Add Task
+                        </button>
+
+                    </div>
+
+                    <ul>
+                        ${
+                            m.tasks.map(task => `
+                                <li>${task.title}</li>
+                            `).join("")
+                        }           
+                    </ul>
+
+                </li>
+                `).join("")
+                }
                 </ul>
 
             </div>
@@ -99,6 +127,34 @@ function addMilestone(goalId, btn){
         id: Date.now(),
         title: milestone,
         tasks: []
+    });
+
+    renderGoals();
+}
+function addTask(goalId, milestoneId){
+
+    const input =
+        document.getElementById(
+            `task-${milestoneId}`
+        );
+
+    const taskTitle =
+        input.value.trim();
+
+    if(taskTitle === "") return;
+
+    const goal =
+        goals.find(g => g.id === goalId);
+
+    const milestone =
+        goal.milestones.find(
+            m => m.id === milestoneId
+        );
+
+    milestone.tasks.push({
+        id: Date.now(),
+        title: taskTitle,
+        completed: false
     });
 
     renderGoals();
