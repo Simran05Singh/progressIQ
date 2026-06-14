@@ -72,6 +72,15 @@ function renderGoals() {
                     Overall Progress:
                     ${calculateProgress(goal)}%
                 </p>
+
+                <div class="progress-bar">
+                    <div
+                        class="progress-fill"
+                        style="
+                            width:${calculateProgress(goal)}%;
+                        "
+                    ></div>
+                </div>
             </div>
 
             <div class="milestone-section">
