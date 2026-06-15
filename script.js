@@ -157,43 +157,7 @@ function renderGoals() {
             </div>
 
 
-            <div class="metric-section">
-
-                <h3>Metrics</h3>
-
-                <input
-                    type="text"
-                    placeholder="Metric Name"
-                    id="metric-name-${goal.id}"
-                >
-
-                <input
-                    type="number"
-                    placeholder="Target"
-                    id="metric-target-${goal.id}"
-                >
-
-            <button
-                onclick="addMetric(${goal.id})"
-            >
-                Add Metric
-            </button>
-
-            <ul>
-                ${
-                    goal.metrics.map(metric => `
-                        <li>
-                            ${metric.name}
-                            :
-                            ${metric.current}
-                            /
-                            ${metric.target}
-                        </li>
-                    `).join("")
-                }
-            </ul>
-
-        </div>  
+            
         `;
 
         goalContainer.appendChild(card);
