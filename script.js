@@ -156,10 +156,6 @@ function renderGoals() {
 
             </div>
 
-            <div class="task-section">
-                <h3>Tasks</h3>
-                <p>No tasks yet</p>
-            </div>
 
             <div class="metric-section">
 
