@@ -73,3 +73,16 @@ button{
     background:#4CAF50;
     transition:0.3s;
 }
+.milestone-section ul,
+.task-section ul{
+    list-style: none;
+    padding-left: 0;
+}
+li{
+    margin-top:10px;
+}
+
+li strong{
+    display:block;
+    margin-bottom:10px;
+}

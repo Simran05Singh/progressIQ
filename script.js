@@ -162,9 +162,42 @@ function renderGoals() {
             </div>
 
             <div class="metric-section">
+
                 <h3>Metrics</h3>
-                <p>No metrics added</p>
-            </div>
+
+                <input
+                    type="text"
+                    placeholder="Metric Name"
+                    id="metric-name-${goal.id}"
+                >
+
+                <input
+                    type="number"
+                    placeholder="Target"
+                    id="metric-target-${goal.id}"
+                >
+
+            <button
+                onclick="addMetric(${goal.id})"
+            >
+                Add Metric
+            </button>
+
+            <ul>
+                ${
+                    goal.metrics.map(metric => `
+                        <li>
+                            ${metric.name}
+                            :
+                            ${metric.current}
+                            /
+                            ${metric.target}
+                        </li>
+                    `).join("")
+                }
+            </ul>
+
+        </div>  
         `;
 
         goalContainer.appendChild(card);
@@ -242,6 +275,47 @@ function toggleTask(
 
     task.completed =
         !task.completed;
+
+    renderGoals();
+}
+function addMetric(goalId){
+
+    const nameInput =
+        document.getElementById(
+            `metric-name-${goalId}`
+        );
+
+    const targetInput =
+        document.getElementById(
+            `metric-target-${goalId}`
+        );
+
+    const name =
+        nameInput.value.trim();
+
+    const target =
+        Number(targetInput.value);
+
+    if(name === "" || target <= 0){
+        return;
+    }
+
+    const goal =
+        goals.find(
+            g => g.id === goalId
+        );
+
+    goal.metrics.push({
+
+        id: Date.now(),
+
+        name: name,
+
+        target: target,
+
+        current: 0
+
+    });
 
     renderGoals();
 }
